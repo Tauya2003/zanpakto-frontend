@@ -1,0 +1,100 @@
+.sign-up {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-up-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.sign-up-card {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.sign-up-card .btnCancel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  display: grid;
+  place-content: center;
+  outline: none;
+  background-color: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sign-up-card .btnCancel:hover {
+  color: #a00;
+}
+
+.sign-up-card h1 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.sign-up-form .input-container {
+  position: relative;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.sign-up-form .input-container label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.sign-up-form .input-container input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+.sign-up-form .input-container input:focus {
+  border-color: #333;
+}
+
+.sign-up-form button {
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  background-color: #000;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sign-up-form button:hover {
+  background-color: #333;
+}
+
