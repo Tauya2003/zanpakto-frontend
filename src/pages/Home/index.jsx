@@ -1,11 +1,23 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
 import Products from "../../components/Products";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "../../components/SearchBar";
+import { fetchFromAPI } from "../../utils/fetchFromAPI";
 
 const Home = () => {
   const navigate = useNavigate();
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const products = await fetchFromAPI("api/products");
+      setProducts(products);
+    };
+
+    getProducts();
+  }, []);
 
   return (
     <div className="home">
@@ -37,7 +49,7 @@ const Home = () => {
         <SearchBar />
       </section>
 
-      <Products />
+      <Products products={products} />
     </div>
   );
 };
