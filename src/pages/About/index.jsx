@@ -13,8 +13,6 @@ const About = () => {
 
         <p
           style={{
-            // put a 50% width on the paragraph on screens that are 600px or larger
-
             "@media (max-width: 600px)": {
               width: "50%",
             },
