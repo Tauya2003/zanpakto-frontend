@@ -171,7 +171,7 @@ const SignUp = () => {
                 />
               </div>
 
-              <button>Sign Up</button>
+              <button type="submit">Sign Up</button>
             </form>
           </div>
         </div>

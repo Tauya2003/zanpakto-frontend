@@ -3,6 +3,8 @@ import "./style.css";
 import logo from "../../assets/logo.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { IconButton } from "@mui/material";
+import { Close } from "@mui/icons-material";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -37,7 +39,6 @@ const Login = () => {
     return alert("Invalid email or password");
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     checkUser();
@@ -50,6 +51,18 @@ const Login = () => {
       <section className="container">
         <div className="login-container">
           <div className="login-card">
+            <IconButton
+              onClick={() => navigate("/")}
+              sx={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                transition: "all 0.3s ease",
+                ":hover": { color: "#ff0000", bgcolor: "transparent" },
+              }}
+            >
+              <Close />
+            </IconButton>
             <img src={logo} alt="logo" onClick={() => navigate("/")} />
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>

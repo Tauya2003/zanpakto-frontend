@@ -3,8 +3,8 @@ import "./style.css";
 import { fetchFromAPI } from "../../utils/fetchFromAPI";
 import { useParams } from "react-router-dom";
 import { Box, CircularProgress, Rating } from "@mui/material";
-import { Add, Remove } from "@mui/icons-material";
-import shoes from "../../assets/images/shoes1.jpg";
+import { Add, Remove, WhatsApp } from "@mui/icons-material";
+import placeholderImage from "../../assets/images/product-placeholder.jpg";
 
 const Product = () => {
   const { productId } = useParams();
@@ -12,10 +12,11 @@ const Product = () => {
   const [productData, setProductData] = useState({});
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
+  const [supplierPhoneNo, setSupplierPhoneNo] = useState("");
 
   useEffect(() => {
     const getProductData = async () => {
-      const data = await fetchFromAPI(`api/products/65633907d0fa9231d8a135fb`);
+      const data = await fetchFromAPI(`api/products/${productId}`);
       if (data) setProductData(data);
 
       setLoading(false);
@@ -23,6 +24,19 @@ const Product = () => {
 
     getProductData();
   }, [productId]);
+
+  useEffect(() => {
+    const getSupplierData = async () => {
+      const data = await fetchFromAPI(
+        `api/suppliers/${productData.supplierId}`
+      );
+      if (data) setSupplierPhoneNo(data.phoneNumber);
+
+      setLoading(false);
+    };
+
+    getSupplierData();
+  }, [productData.supplierId]);
 
   if (loading)
     return (
@@ -59,8 +73,8 @@ const Product = () => {
       <section className="container">
         <div className="left-column">
           <img
-            src={productData.image ? productData.image : shoes}
-            alt={productData.name}
+            src={productData?.image ? productData?.image : placeholderImage}
+            alt={productData?.name}
             className="product-img"
           />
         </div>
@@ -97,9 +111,19 @@ const Product = () => {
             </div>
 
             <div className="add-to-cart-btn">
-              <button className="cart-btn">
-                <Add />
-                Add to cart
+              <button
+                className="cart-btn"
+                onClick={
+                  // i want a function that send a message to the supplier with the product name and quantity
+                  () => {
+                    window.open(
+                      `https://wa.me/263${supplierPhoneNo}?text=Hi, I want to order ${quantity} ${productData.name}s`
+                    );
+                  }
+                }
+              >
+                <WhatsApp sx={{ color: "#0a07" }} />
+                Order Now
               </button>
             </div>
           </div>

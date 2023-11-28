@@ -4,6 +4,7 @@ import Products from "../../components/Products";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "../../components/SearchBar";
 import { fetchFromAPI } from "../../utils/fetchFromAPI";
+import { Box, CircularProgress } from "@mui/material";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ const Home = () => {
 
     getProducts();
   }, []);
+
+
 
   return (
     <div className="home">
