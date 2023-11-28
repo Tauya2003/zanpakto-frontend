@@ -3,7 +3,7 @@ import ProductsCard from "./ProductsCard";
 import { Box, CircularProgress } from "@mui/material";
 
 const Products = ({ products }) => {
-  if (products.length === 0 || !products)
+  if (products?.length === 0 || !products)
     return (
       <Box
         sx={{

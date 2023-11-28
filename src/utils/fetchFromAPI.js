@@ -8,7 +8,8 @@ const options = {
 
 export const fetchFromAPI = async (url) => {
   try {
-    const { data } = await axios.get(`${BASE_URL}/${url}`, options);
+    const { data, status } = await axios.get(`${BASE_URL}/${url}`, options);
+
     return data;
   } catch (error) {
     console.log(error);
