@@ -16,6 +16,9 @@ const SupplierDashBoard = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(true);
+  const [successOpen, setSuccessOpen] = useState(false);
+  const [failureOpen, setFailureOpen] = useState(false);
+  const [enterAllFields, setEnterAllFields] = useState(false);
 
   // fetch supplier data on load
   useEffect(() => {

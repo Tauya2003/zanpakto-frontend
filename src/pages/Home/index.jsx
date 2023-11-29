@@ -16,21 +16,13 @@ const Home = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const products = await fetchFromAPI("api/products");
-      setProducts(products);
+      const data = await fetchFromAPI("api/products");
+      setProducts(data);
     };
 
     getProducts();
   }, []);
 
-  // const getSearchResults = async () => {
-  //   const results = await fetchFromAPI(`api/products/search/${searchTerm}`);
-  //   setSearchResults(results);
-  // };
-
-  
-
-  // create a function to handle that set products from products state with name like search term and set it to search results without having to make a new api call
   const getSearchResults = () => {
     const results = products.filter((product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())

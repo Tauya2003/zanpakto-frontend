@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import "./style.css";
 import logo from "../../assets/logo.svg";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { IconButton } from "@mui/material";
+import { Alert, IconButton, Snackbar } from "@mui/material";
 import { Close } from "@mui/icons-material";
+import { fetchFromAPI } from "../../utils/fetchFromAPI";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,16 +12,16 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [suppliers, setSuppliers] = useState(null);
   const [supplierId, setSupplierId] = useState([]);
+  const [successOpen, setSuccessOpen] = useState(false);
+  const [failureOpen, setFailureOpen] = useState(false);
 
   // get all suppliers on load
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/suppliers")
-      .then((res) => {
-        setSuppliers(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => console.log(err));
+    const getData = async () => {
+      const data = await fetchFromAPI("api/suppliers");
+      setSuppliers(data);
+    };
+    getData();
   }, []);
 
   const checkUser = () => {
@@ -31,17 +31,31 @@ const Login = () => {
       if (suppliers[i].email === email && suppliers[i].password === password) {
         // if they match, get the id of the supplier
         setSupplierId(suppliers[i].id);
-        alert("Login successful");
-        return navigate(`/dashboard/${suppliers[i]._id}`);
+        setSuccessOpen(true);
+
+        // delay for 1 second then naviagte to the dashboard
+
+        return setTimeout(() => {
+          navigate(`/dashboard/${suppliers[i]._id}`);
+        }, 3000);
       }
     }
 
-    return alert("Invalid email or password");
+    return setFailureOpen(true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     checkUser();
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSuccessOpen(false);
+    setFailureOpen(false);
   };
 
   return (
@@ -96,6 +110,26 @@ const Login = () => {
           </div>
         </div>
       </section>
+
+      <Snackbar
+        open={successOpen}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Login successful!
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={failureOpen}
+        autoHideDuration={3000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Login failed!
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
