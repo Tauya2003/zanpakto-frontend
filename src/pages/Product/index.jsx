@@ -117,7 +117,7 @@ const Product = () => {
                   // i want a function that send a message to the supplier with the product name and quantity
                   () => {
                     window.open(
-                      `https://wa.me/263${supplierPhoneNo}?text=Hi, I want to order ${quantity} ${productData.name}s`
+                      `https://wa.me/+263${supplierPhoneNo}?text=Hi, I want to order ${quantity} ${productData.name}s`
                     );
                   }
                 }
